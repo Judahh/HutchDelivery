@@ -1,0 +1,15 @@
+{
+  "name": "testTypeScriptNode",
+  "version": "1.0.0",
+  "description": "testando com typescript, node e mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jr",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3"
+  }
+}
