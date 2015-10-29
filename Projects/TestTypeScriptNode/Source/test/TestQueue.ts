@@ -17,6 +17,12 @@ describe("TestQueue", function() {
 		account.key.should.be.equal("2u8JLG0pkaUjmy287vE5Ldi+3klWLiRrJfaM+Wy3GTy5G4iwdp9esj4zUh8EX7Hc5RP0d0ao/7DAunRpOVkDcA==");
 	})
 	
+	it("Deve retornar o AccountURL", () => {
+		var account = new Account.Account();
+		
+		account.uRL.should.be.equal("http://iviaq.queue.core.windows.net/");
+	})
+	
 	it("Deve retornar o AccountName iviaq", () => {
 		var account = new Account.Account();
 		var queue = new Queue.Queue(account);

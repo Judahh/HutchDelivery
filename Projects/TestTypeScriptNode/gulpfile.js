@@ -5,7 +5,7 @@ var typescript = require('gulp-typescript');
 var runSequence = require('run-sequence');
 var del = require('del');
 var presentationScriptsDir = 'Source/';
-var testScriptsDir = 'test/';
+var testScriptsDir = 'Test/';
 var allDir = '**/';
 
 var allTypeScripts = [
