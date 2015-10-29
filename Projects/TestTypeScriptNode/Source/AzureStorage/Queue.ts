@@ -1,16 +1,16 @@
-import Account = require("../AzureStorage/Account");
+import account = require("../AzureStorage/Account");
 // let envs = require('envs');
 // let process = require('process')
 // let azure = require('azure-queue-node');
 require('dotenv').load();
 let azure = require('azure-storage');
 export class Queue {
-  private _account:Account.Account;
+  private _account:account.Account;
   private _name:string;
   private _queueService;
   private _error:boolean;
   
-  public constructor(account:Account.Account){
+  public constructor(account:account.Account){
     this._error=true;
     this._account=account;
     this._queueService = azure.createQueueService();
@@ -48,7 +48,7 @@ export class Queue {
         return this._account;
   }
   
-  public set account(account:Account.Account) {
+  public set account(account:account.Account) {
       this._account = account;
   }
 }

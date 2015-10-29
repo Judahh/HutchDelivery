@@ -1,5 +1,5 @@
-/// <reference path='../../typings/mocha/mocha.d.ts' />
-/// <reference path='../../typings/chai/chai.d.ts' />
+/// <reference path='../../../typings/mocha/mocha.d.ts' />
+/// <reference path='../../../typings/chai/chai.d.ts' />
 var Account = require("../../AzureStorage/Account");
 var Queue = require("../../AzureStorage/Queue");
 var chai = require("chai");
