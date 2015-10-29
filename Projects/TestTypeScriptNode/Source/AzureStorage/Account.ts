@@ -6,7 +6,7 @@ export class Account {
   public constructor(name?:string, key?:string, uRL?:string){
     this._name=name||'iviaq';
     this._key=key||'2u8JLG0pkaUjmy287vE5Ldi+3klWLiRrJfaM+Wy3GTy5G4iwdp9esj4zUh8EX7Hc5RP0d0ao/7DAunRpOVkDcA==';
-    this._uRL=uRL||'http://'+this._name+'.queue.core.windows.net/';
+    this._uRL=uRL||'https://'+this._name+'.queue.core.windows.net/';
   }
   
   public get name():string {

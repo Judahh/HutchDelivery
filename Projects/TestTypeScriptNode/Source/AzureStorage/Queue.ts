@@ -1,42 +1,48 @@
 import Account = require("../AzureStorage/Account");
-let azure = require('azure-queue-node');
+// let envs = require('envs');
+// let process = require('process')
+// let azure = require('azure-queue-node');
+require('dotenv').load();
+let azure = require('azure-storage');
 export class Queue {
   private _account:Account.Account;
-  private _queueName:string;
-  private _queueSvc;
+  private _name:string;
+  private _queueService;
+  private _error:boolean;
   
   public constructor(account:Account.Account){
+    this._error=true;
     this._account=account;
-    
-    azure.setDefaultClient({
-      accountUrl: this._account.uRL,
-      accountName: this._account.name,
-      accountKey: this._account.key
-    });
-    
-    this._account=account;
-    
-    this._queueSvc = azure.getDefaultClient();
+    this._queueService = azure.createQueueService();
   }
   
-	public createQueue(queueName?:string):boolean{
-      this._queueSvc.createQueue(queueName, true, function(error, result, response){
-        if(!error){
-          this._queueName=queueName||'appqueue';
-          return true;
-        }
-      });
-      return false;
-	}
-	
-	public createMessage(message):boolean{
-		this._queueSvc.putMessage(this._queueName, message, function(error, result){
+  public createQueue(name?:string){
+    this._name=name;
+    this._queueService.createQueueIfNotExists(this._name, true, function(error, result, response){
+      this._name="error";
       if(!error){
-        return true;
+        // return true;
       }
+      this._error=error;
     });
-    return false;
-	}
+  }
+  
+  public createMessage(message){
+    this._queueService.createMessage(this._name, message, function(error, result){
+      if(!error){
+        // return true;
+      }
+      this._error=error;
+    });
+  }
+  
+  public get error():boolean {
+        return this._error;
+  }
+  
+  public get name():string {
+        return this._name;
+  }
   
   public get account() {
         return this._account;

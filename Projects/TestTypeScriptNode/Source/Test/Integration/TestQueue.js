@@ -15,7 +15,7 @@ describe("TestQueue", function () {
     });
     it("Deve retornar o AccountURL", function () {
         var account = new Account.Account();
-        account.uRL.should.be.equal("http://iviaq.queue.core.windows.net/");
+        account.uRL.should.be.equal("https://iviaq.queue.core.windows.net/");
     });
     it("Deve retornar o AccountName iviaq", function () {
         var account = new Account.Account();
@@ -25,17 +25,34 @@ describe("TestQueue", function () {
     it("Deve retornar Ok ao criar fila", function () {
         var account = new Account.Account();
         var queue = new Queue.Queue(account);
-        var result = queue.createQueue();
-        result.should.be.equal(true);
+        queue.createQueue("appqueue");
+        var result = queue.error;
+        result.should.be.equal(false);
+    });
+    it("Deve retornar name ao criar fila", function () {
+        var account = new Account.Account();
+        var queue = new Queue.Queue(account);
+        queue.createQueue("appqueue");
+        var name = queue.name;
+        name.should.be.equal("appqueue");
+    });
+    it("Deve retornar ABCDEFG ao pegar nome da message", function () {
+        var message = {
+            id: 99,
+            name: "ABCDEFG"
+        };
+        message.name.should.be.equal("ABCDEFG");
     });
     it("Deve retornar Ok ao criar message", function () {
         var account = new Account.Account();
         var queue = new Queue.Queue(account);
         var message = {
             id: 99,
-            name: 'ABCDEFG'
+            name: "ABCDEFG"
         };
-        var result = queue.createMessage(message);
-        result.should.be.equal(true);
+        queue.createQueue("appqueue");
+        queue.createMessage("message");
+        var result = queue.error;
+        result.should.be.equal(false);
     });
 });

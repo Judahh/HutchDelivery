@@ -1,32 +1,41 @@
-var azure = require('azure-queue-node');
+require('dotenv').load();
+var azure = require('azure-storage');
 var Queue = (function () {
     function Queue(account) {
+        this._error = true;
         this._account = account;
-        azure.setDefaultClient({
-            accountUrl: this._account.uRL,
-            accountName: this._account.name,
-            accountKey: this._account.key
-        });
-        this._account = account;
-        this._queueSvc = azure.getDefaultClient();
+        this._queueService = azure.createQueueService();
     }
-    Queue.prototype.createQueue = function (queueName) {
-        this._queueSvc.createQueue(queueName, true, function (error, result, response) {
+    Queue.prototype.createQueue = function (name) {
+        this._name = name;
+        this._queueService.createQueueIfNotExists(this._name, true, function (error, result, response) {
+            this._name = "error";
             if (!error) {
-                this._queueName = queueName || 'appqueue';
-                return true;
             }
+            this._error = error;
         });
-        return false;
     };
     Queue.prototype.createMessage = function (message) {
-        this._queueSvc.putMessage(this._queueName, message, function (error, result) {
+        this._queueService.createMessage(this._name, message, function (error, result) {
             if (!error) {
-                return true;
             }
+            this._error = error;
         });
-        return false;
     };
+    Object.defineProperty(Queue.prototype, "error", {
+        get: function () {
+            return this._error;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Queue.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Queue.prototype, "account", {
         get: function () {
             return this._account;
