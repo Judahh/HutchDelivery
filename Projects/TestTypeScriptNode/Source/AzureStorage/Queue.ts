@@ -1,7 +1,4 @@
 import account = require("../AzureStorage/Account");
-// let envs = require('envs');
-// let process = require('process')
-// let azure = require('azure-queue-node');
 require('dotenv').load();
 let azure = require('azure-storage');
 export class Queue {

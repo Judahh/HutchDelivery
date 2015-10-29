@@ -1,5 +1,5 @@
 // load the things we need
-let mongoose = require('mongoose');
+import mongoose = require('mongoose');
 let bcrypt   = require('bcrypt-nodejs');
 
 export class User{
