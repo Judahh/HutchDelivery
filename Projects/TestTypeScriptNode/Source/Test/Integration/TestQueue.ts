@@ -1,8 +1,8 @@
 /// <reference path='../../typings/mocha/mocha.d.ts' />
 /// <reference path='../../typings/chai/chai.d.ts' />
 
-import Account = require("../AzureStorage/Account");
-import Queue = require("../AzureStorage/Queue");
+import Account = require("../../AzureStorage/Account");
+import Queue = require("../../AzureStorage/Queue");
 import chai = require("chai");
 chai.should();
 
