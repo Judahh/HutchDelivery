@@ -1,6 +1,7 @@
 /// <reference path='../../../typings/mocha/mocha.d.ts' />
 /// <reference path='../../../typings/chai/chai.d.ts' />
 /// <reference path='../../../typings/mongodb/mongodb.d.ts' />
+/// <reference path='../../../typings/mongoose/mongoose.d.ts' />
 import user = require("../../Model/User");
 import chai = require("chai");
 import mongodb = require("mongoose");
