@@ -1,7 +1,8 @@
+var env = require('dotenv').load();
 var Account = (function () {
     function Account(name, key, uRL) {
-        this._name = name || 'iviaq';
-        this._key = key || '2u8JLG0pkaUjmy287vE5Ldi+3klWLiRrJfaM+Wy3GTy5G4iwdp9esj4zUh8EX7Hc5RP0d0ao/7DAunRpOVkDcA==';
+        this._name = name || process.env.AZURE_STORAGE_ACCOUNT;
+        this._key = key || process.env.AZURE_STORAGE_ACCESS_KEY;
         this._uRL = uRL || 'https://' + this._name + '.queue.core.windows.net/';
     }
     Object.defineProperty(Account.prototype, "name", {

@@ -1,36 +1,38 @@
 /// <reference path='../../../typings/mocha/mocha.d.ts' />
 /// <reference path='../../../typings/chai/chai.d.ts' />
 
+var env = require('dotenv').load();
 import Account = require("../../AzureStorage/Account");
 import Queue = require("../../AzureStorage/Queue");
 import chai = require("chai");
 chai.should();
 
 describe("TestQueue", function() {
-	it("Deve retornar o AccountName iviaq", () => {
-		var account = new Account.Account();
-		account.name.should.be.equal("iviaq");
-	})
+	it("Deve retornar o AccountName " + process.env.AZURE_STORAGE_ACCOUNT, function () {
+        var account = new Account.Account();
+        account.name.should.be.equal(process.env.AZURE_STORAGE_ACCOUNT);
+    });
 	
-	it("Deve retornar o AccountKey", () => {
-		var account = new Account.Account();
-		account.key.should.be.equal("2u8JLG0pkaUjmy287vE5Ldi+3klWLiRrJfaM+Wy3GTy5G4iwdp9esj4zUh8EX7Hc5RP0d0ao/7DAunRpOVkDcA==");
-	})
+    it("Deve retornar o AccountKey", function () {
+        var account = new Account.Account();
+        account.key.should.be.equal(process.env.AZURE_STORAGE_ACCESS_KEY);
+    });
 	
 	it("Deve retornar o AccountURL", () => {
 		var account = new Account.Account();
-		account.uRL.should.be.equal("https://iviaq.queue.core.windows.net/");
+		account.uRL.should.be.equal("https://"+process.env.AZURE_STORAGE_ACCOUNT+".queue.core.windows.net/");
 	})
 	
-	it("Deve retornar o AccountName iviaq", () => {
+	it("Deve retornar o AccountName " + process.env.AZURE_STORAGE_ACCOUNT, () => {
 		var account = new Account.Account();
 		var queue = new Queue.Queue(account);
-		queue.account.name.should.be.equal("iviaq");
+		queue.account.name.should.be.equal(process.env.AZURE_STORAGE_ACCOUNT);
 	})
 	
 	it("Deve retornar Ok ao criar fila", () => {
 		var account = new Account.Account();
 		var queue = new Queue.Queue(account);
+		
 		queue.createQueue("appqueue");
 		var result = queue.error;
 		result.should.be.equal(false);
