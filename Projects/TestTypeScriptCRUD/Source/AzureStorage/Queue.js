@@ -1,30 +1,45 @@
-var env = require('dotenv').load();
 var azure = require('azure-storage');
+var env = require('dotenv').load();
 var Queue = (function () {
     function Queue(account) {
-        this._error = true;
-        this._account = account;
         this._queueService = azure.createQueueService();
+        this._account = account;
     }
     Queue.prototype.createQueue = function (name) {
-        this._name = name;
-        this._queueService.createQueueIfNotExists(this._name, true, function (error, result, response) {
-            this._name = "error";
-            if (!error) {
+        this._name = name || process.env.AZURE_STORAGE_QUEUE;
+        this._queueService.createQueueIfNotExists(this._name, true, function (error) {
+            if (error) {
+                throw new Error(error);
             }
-            this._error = error;
         });
     };
     Queue.prototype.createMessage = function (message) {
-        this._queueService.createMessage(this._name, message, function (error, result) {
-            if (!error) {
+        this._queueService.createMessage(this._name, message, function (error) {
+            if (error) {
+                throw new Error(error);
             }
-            this._error = error;
         });
     };
-    Object.defineProperty(Queue.prototype, "error", {
+    Queue.prototype.getMessages = function (callback) {
+        this._queueService.getMessages(this._name, function (error, result) {
+            if (error) {
+                throw new Error(error);
+            }
+            else {
+                callback(result);
+            }
+        });
+    };
+    Queue.prototype.deleteMessage = function (message) {
+        this._queueService.deleteMessage(this._name, message.messageid, message.popreceipt, function (error, response) {
+            if (error) {
+                throw new Error(error);
+            }
+        });
+    };
+    Object.defineProperty(Queue.prototype, "queueService", {
         get: function () {
-            return this._error;
+            return this._queueService;
         },
         enumerable: true,
         configurable: true

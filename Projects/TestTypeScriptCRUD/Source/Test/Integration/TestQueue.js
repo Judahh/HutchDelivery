@@ -23,37 +23,25 @@ describe("TestQueue", function () {
         var queue = new Queue.Queue(account);
         queue.account.name.should.be.equal(process.env.AZURE_STORAGE_ACCOUNT);
     });
-    it("Deve retornar Ok ao criar fila", function () {
-        var account = new Account.Account();
-        var queue = new Queue.Queue(account);
-        queue.createQueue("appqueue");
-        var result = queue.error;
-        result.should.be.equal(false);
-    });
-    it("Deve retornar name ao criar fila", function () {
-        var account = new Account.Account();
-        var queue = new Queue.Queue(account);
-        queue.createQueue("appqueue");
-        var name = queue.name;
-        name.should.be.equal("appqueue");
-    });
-    it("Deve retornar ABCDEFG ao pegar nome da message", function () {
-        var message = {
-            id: 99,
-            name: "ABCDEFG"
-        };
-        message.name.should.be.equal("ABCDEFG");
-    });
     it("Deve retornar Ok ao criar message", function () {
         var account = new Account.Account();
         var queue = new Queue.Queue(account);
         var message = {
-            id: 99,
-            name: "ABCDEFG"
+            "id": "99",
+            "name": "ABCDEFG"
         };
+        queue.createQueue();
+        queue.createMessage(JSON.stringify(message));
+    });
+    it("Deve remover message", function () {
+        var account = new Account.Account();
+        var queue = new Queue.Queue(account);
         queue.createQueue("appqueue");
-        queue.createMessage("message");
-        var result = queue.error;
-        result.should.be.equal(false);
+        queue.getMessages(function (result) {
+            for (var index = 0; index < result.length; index++) {
+                console.log("Get Message" + index + ":" + result[index].messagetext);
+                queue.deleteMessage(result[index]);
+            }
+        });
     });
 });

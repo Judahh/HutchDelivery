@@ -8,7 +8,7 @@ import mongoose = require("mongoose");
 chai.should();
 
 describe("TestDatabase", function() {
-	it("Deve retornar o AccountName iviaq", () => {
+	it("Deve retornar", () => {
 		// var createInstance = new mongoose.Mongoose();
 		// var Schema = mongoose.Schema;
 		// var CreateSchema = new Schema({});
