@@ -33,8 +33,8 @@ describe("TestQueue", function() {
 		var account = new Account.Account();
 		var queue = new Queue.Queue(account);
 		var message = {
-			"id": "99",
-  			"name": "ABCDEFG"
+			"Id": 99,
+  			"Nome": "Lanister"
 		}
 		queue.createQueue(); 
 		queue.createMessage(JSON.stringify(message));
