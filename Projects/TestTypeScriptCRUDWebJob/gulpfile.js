@@ -21,8 +21,8 @@ var javaScriptTestGlob = [
     presentationScriptsDir + testScriptsDir + '**/*.js'
 ];
 
-var typeScriptTestGlob = [
-    presentationScriptsDir + testScriptsDir + '**/*.ts'
+var javaScriptTestUnitary = [
+    presentationScriptsDir + testScriptsDir + 'Unitary/**/*.js'
 ];
 
 var tsProject = typescript.createProject(
@@ -34,25 +34,12 @@ var tsProject = typescript.createProject(
     noImplicitAny: false,
 });
 
-/**
-* Execute all tests.
-*/
-// gulp.task('compile-TypeScript', function () {
-//     return gulp.src('app/**/*.ts')
-//         .pipe(typescript({
-//             noImplicitAny: true,
-//             out: 'output.js'
-//         })
-//         .pipe(gulp.dest('app')));
-// });
-
-// gulp.task('test-compile-TypeScript', function () {
-//     return gulp.src(typeScriptTestGlob)
-//         .pipe(typescript(tsProject))
-//         .pipe(gulp.dest(testScriptsDir));
-// });
-
 gulp.task('test-JavaScript', function () {
+    return gulp.src(javaScriptTestUnitary, { read: false })
+    .pipe(mocha());
+});
+
+gulp.task('test-JavaScriptWithIntegrationTests', function () {
     return gulp.src(javaScriptTestGlob, { read: false })
     .pipe(mocha());
 });
@@ -74,6 +61,15 @@ gulp.task("compileAndTest-TypeScript", function () {
               'test-JavaScript');
 });
 
+gulp.task("compileAndTest-TypeScriptWithIntegrationTests", function () {
+    return runSequence('compile-TypeScript',
+              'test-JavaScriptWithIntegrationTests');
+});
+
 gulp.task("watch-TypeScript", function() {
     return gulp.watch(typeScriptGlob, ["compileAndTest-TypeScript"]);
+});
+
+gulp.task("watch-TypeScriptWithIntegrationTests", function() {
+    return gulp.watch(typeScriptGlob, ["compileAndTest-TypeScriptWithIntegrationTests"]);
 });

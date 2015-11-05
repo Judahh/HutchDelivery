@@ -15,20 +15,15 @@
 		{
 			"taskName": "compile-TypeScript",
 			"isTestCommand": false,
-			"isBuildCommand": true /*,
-		
-			// Show the output window only if unrecognized errors occur.
-			"showOutput": "always",
-		
-			// Tell the tsc compiler to use the tsconfig.json from the open folder.
-			"args": ["-p", "."],
-		
-			// use the standard tsc problem matcher to find compile problems
-			// in the output.
-			"problemMatcher": "$tsc"*/
+			"isBuildCommand": true
 		},
 		{
 			"taskName": "test-JavaScript",
+			"isTestCommand": true,
+			"isBuildCommand": false
+		},
+		{
+			"taskName": "test-JavaScriptWithIntegrationTests",
 			"isTestCommand": true,
 			"isBuildCommand": false
 		},
@@ -38,7 +33,17 @@
 			"isBuildCommand": true
 		},
 		{
+			"taskName": "compileAndTest-TypeScriptWithIntegrationTests",
+			"isTestCommand": true,
+			"isBuildCommand": true
+		},
+		{
 			"taskName": "watch-TypeScript",
+			"isTestCommand": true,
+			"isBuildCommand": true
+		},
+		{
+			"taskName": "watch-TypeScriptWithIntegrationTests",
 			"isTestCommand": true,
 			"isBuildCommand": true
 		},
