@@ -2,8 +2,8 @@
 /// <reference path='../../../typings/chai/chai.d.ts' />
 
 var env = require('dotenv').load();
-import Account = require("../../AzureStorage/Account");
-import Queue = require("../../AzureStorage/Queue");
+import Account = require("../../Shared/Util/AzureStorage/Account");
+import Queue = require("../../Shared/Util/AzureStorage/Queue");
 import chai = require("chai");
 chai.should();
 

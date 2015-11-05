@@ -1,4 +1,4 @@
-/// <reference path="../../typings/documentdb/documentdb.d.ts" />
+/// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
 // import account = require("../DocumentDB/Collection");
 import DocumentDB = require('documentdb');
 

@@ -1,4 +1,4 @@
-/// <reference path="../../typings/documentdb/documentdb.d.ts" />
+/// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
  import account = require("../DocumentDB/Database");
 import documentDB = require('documentdb');
 var env = require('dotenv').load();
