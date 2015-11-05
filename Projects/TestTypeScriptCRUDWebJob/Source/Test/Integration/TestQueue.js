@@ -4,8 +4,14 @@ var env = require('dotenv').load();
 var chai = require("chai");
 chai.should();
 describe("TestQueue", function () {
-    // it("Deve retornar o AccountName " + process.env.AZURE_STORAGE_ACCOUNT, function () {
-    //     var account = new Account.Account();
-    //     account.name.should.be.equal(process.env.AZURE_STORAGE_ACCOUNT);
-    // });
+    // it("Deve retornar Ok ao criar message", () => {
+    // 	var account = new Account.Account();
+    // 	var queue = new Queue.Queue(account);
+    // 	var message = {
+    // 		"Id": 99,
+    // 		"Nome": "Lanister"
+    // 	}
+    // 	queue.createQueue(); 
+    // 	queue.createMessage(JSON.stringify(message));
+    // })
 });
