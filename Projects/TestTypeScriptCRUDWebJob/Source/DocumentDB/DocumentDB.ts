@@ -14,6 +14,19 @@ export class DocumentDB {
     this._client = new documentDB.DocumentClient(this._endPoint, {masterKey: this._authKey});
   }
   
+  public getListDatabase(callback){
+    this._client.queryDatabases("SELECT * FROM d").toArray(function(error,result){
+      if(error){
+        console.log("Error:");//TODO: Create an ERROR
+				console.log(error);
+        throw new Error("Error");
+      }else{
+        //TODO:_listDatabase populate with result
+        callback(this._listDatabase);
+      }
+    });
+  }
+  
   public get endPoint():string{
         return this._endPoint;
   }
