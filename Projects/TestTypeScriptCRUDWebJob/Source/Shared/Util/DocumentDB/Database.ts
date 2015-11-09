@@ -45,7 +45,6 @@ export class Database {
           var collection=new collection.Collection(element.id,element._rid,element._ts,element._self,element._etag,element._docs,element._sprocs,element._triggers,element._udfs,element._conflicts,element.indexingPolicy,this._client);
 					this._listCollection.add(collection);
 				});
-        
         callback(this._listCollection);
       }
     });
