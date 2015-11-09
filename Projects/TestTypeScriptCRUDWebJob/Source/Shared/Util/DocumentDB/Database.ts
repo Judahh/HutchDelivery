@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
-import documentDB = require('documentdb');
-import list = require("../Collection/List");
-import collection = require("../DocumentDB/Collection");
+import importDocumentDB = require('documentdb');
+import importList = require("../Collection/List");
+import importCollection = require("./Collection");
 export class Database {
-  private _listCollection:list.List<collection.Collection>;
+  private _listCollection:importList.List<importCollection.Collection>;
   private _name:string;//id
   private _identification:string;//rid
   private _timestamp:string;//ts
@@ -11,7 +11,7 @@ export class Database {
   private _eTag:string;
   private _collectionsFeed:string;//colls
   private _usersFeed:string;//users
-  private _client:documentDB.DocumentClient;
+  private _client:importDocumentDB.DocumentClient;
   
   public constructor(
   name:string,
@@ -21,7 +21,7 @@ export class Database {
   eTag:string,
   collectionsFeed:string,
   usersFeed:string,
-  client:documentDB.DocumentClient){
+  client:importDocumentDB.DocumentClient){
     this._name=name;
     this._identification=identification;
     this._timestamp=timestamp;
@@ -38,9 +38,8 @@ export class Database {
         console.log("Error:");//TODO: Create an ERROR
 				console.log(error);
         throw new Error("Error");
-        
       }else{
-        this._listCollection = new list.List<collection.Collection>();
+        this._listCollection = new importList.List<importCollection.Collection>();
         result.forEach(element => {
           var collection=new collection.Collection(element.id,element._rid,element._ts,element._self,element._etag,element._docs,element._sprocs,element._triggers,element._udfs,element._conflicts,element.indexingPolicy,this._client);
 					this._listCollection.add(collection);

@@ -1,4 +1,4 @@
-var list = require("../Collection/List");
+var importList = require("../Collection/List");
 var Database = (function () {
     function Database(name, identification, timestamp, uRI, eTag, collectionsFeed, usersFeed, client) {
         this._name = name;
@@ -19,7 +19,7 @@ var Database = (function () {
                 throw new Error("Error");
             }
             else {
-                this._listCollection = new list.List();
+                this._listCollection = new importList.List();
                 result.forEach(function (element) {
                     var collection = new collection.Collection(element.id, element._rid, element._ts, element._self, element._etag, element._docs, element._sprocs, element._triggers, element._udfs, element._conflicts, element.indexingPolicy, _this._client);
                     _this._listCollection.add(collection);

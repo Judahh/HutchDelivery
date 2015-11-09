@@ -1,4 +1,4 @@
-var list = require("../Collection/List");
+var importList = require("../Collection/List");
 var Collection = (function () {
     function Collection(name, identification, timestamp, uRI, eTag, documentsFeed, storedProceduresFeed, triggersFeed, userDefinedFunctionsFeed, conflictsFeed, indexingPolicy, client) {
         this._name = name;
@@ -23,9 +23,9 @@ var Collection = (function () {
                 throw new Error("Error");
             }
             else {
-                this._listDocument = new list.List();
+                this._listDocument = new importList.List();
                 result.forEach(function (element) {
-                    var document = new document.Document(element.id, element._rid, element._ts, element._self, element._etag, element._colls, element._users, _this._client);
+                    var document = new document.Document(element._ts, element._self, element._etag, element._attachments, _this._client);
                     _this._listCollection.add(document);
                 });
                 callback(this._listCollection);
@@ -67,16 +67,44 @@ var Collection = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "collectionsFeed", {
+    Object.defineProperty(Collection.prototype, "documentsFeed", {
         get: function () {
-            return this._collectionsFeed;
+            return this._documentsFeed;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "usersFeed", {
+    Object.defineProperty(Collection.prototype, "storedProceduresFeed", {
         get: function () {
-            return this._usersFeed;
+            return this._storedProceduresFeed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Collection.prototype, "triggersFeed", {
+        get: function () {
+            return this._triggersFeed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Collection.prototype, "userDefinedFunctionsFeed", {
+        get: function () {
+            return this._userDefinedFunctionsFeed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Collection.prototype, "conflictsFeed", {
+        get: function () {
+            return this._conflictsFeed;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Collection.prototype, "indexingPolicy", {
+        get: function () {
+            return this._indexingPolicy;
         },
         enumerable: true,
         configurable: true

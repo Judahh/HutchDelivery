@@ -1,18 +1,19 @@
 /// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
-import list = require("../Collection/List");
-import database = require("../DocumentDB/Database");
-import documentDB = require('documentdb');
+import importDocumentDB = require('documentdb');
+import importDatabase  = require('./Database');
+import importList = require('../Collection/List');
+
 var env = require('dotenv').load();
 export class DocumentDB {
-  private _listDatabase:list.List<database.Database>;
+  private _listDatabase:importList.List<importDatabase.Database>;
   private _endPoint:string;
   private _authKey:string;
-  private _client:documentDB.DocumentClient;
+  private _client:importDocumentDB.DocumentClient;
   
   public constructor(endPoint?:string, authKey?:string){
-    this._endPoint = name|| process.env.AZURE_DOCUMENTDB_ENDPOINT;
-    this._authKey = name||process.env.AZURE_DOCUMENTDB_AUTH_KEY;
-    this._client = new documentDB.DocumentClient(this._endPoint, {masterKey: this._authKey});
+    this._endPoint = endPoint|| process.env.AZURE_DOCUMENTDB_ENDPOINT;
+    this._authKey = authKey||process.env.AZURE_DOCUMENTDB_AUTH_KEY;
+    this._client = new importDocumentDB.DocumentClient(this._endPoint, {masterKey: this._authKey});
   }
   
   public getListDatabase(callback){
@@ -21,11 +22,12 @@ export class DocumentDB {
         console.log("Error:");//TODO: Create an ERROR
 				console.log(error);
         throw new Error("Error");
-        
       }else{
-        this._listDatabase = new list.List<database.Database>();
+        this._listDatabase = new importList.List<importDatabase.Database>();
         result.forEach(element => {
-          var database=new database.Database(element.id,element._rid,element._ts,element._self,element._etag,element._colls,element._users,this._client);
+          var collections:string = element._colls;
+          var users:string = element._users; 
+          var database=new importDatabase.Database(element.id,element._rid,element._ts,element._self,element._etag,collections,users,this._client);
 					this._listDatabase.add(database);
 				});
         callback(this._listDatabase);
@@ -41,7 +43,7 @@ export class DocumentDB {
         return this._authKey;
   }
   
-  public get client():documentDB.DocumentClient{
+  public get client():importDocumentDB.DocumentClient{
         return this.client;
   }
   

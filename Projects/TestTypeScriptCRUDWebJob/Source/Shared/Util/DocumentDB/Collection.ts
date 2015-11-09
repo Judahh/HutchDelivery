@@ -1,9 +1,9 @@
 /// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
-import documentDB = require('documentdb');
-import list = require("../Collection/List");
-import document = require("../DocumentDB/Document");
+import importDocumentDB = require('documentdb');
+import importList = require("../Collection/List");
+import importDocument = require("./Document");
 export class Collection {
-  private _listDocument:list.List<document.Document>;
+  private _listDocument:importList.List<importDocument.Document>;
   private _name:string;//id
   private _identification:string;//rid
   private _timestamp:string;//ts
@@ -15,7 +15,7 @@ export class Collection {
   private _userDefinedFunctionsFeed:string;//udfs
   private _conflictsFeed:string;//conflicts
   private _indexingPolicy;
-  private _client:documentDB.DocumentClient;
+  private _client:importDocumentDB.DocumentClient;
   
   public constructor(
   name:string,
@@ -29,7 +29,7 @@ export class Collection {
   userDefinedFunctionsFeed:string,
   conflictsFeed:string,
   indexingPolicy,
-  client:documentDB.DocumentClient){
+  client:importDocumentDB.DocumentClient){
     this._name=name;
     this._identification=identification;
     this._timestamp=timestamp;
@@ -52,9 +52,9 @@ export class Collection {
         throw new Error("Error");
         
       }else{
-        this._listDocument = new list.List<document.Document>();
+        this._listDocument = new importList.List<importDocument.Document>();
         result.forEach(element => {
-          var document=new document.Document(element.id,element._rid,element._ts,element._self,element._etag,element._colls,element._users,this._client);
+          var document=new document.Document(element._ts,element._self,element._etag,element._attachments,this._client);
 					this._listCollection.add(document);
 				});
         callback(this._listCollection);
@@ -86,11 +86,27 @@ export class Collection {
         return this._eTag;
   }
   
-  public get collectionsFeed():string{
-        return this._collectionsFeed;
+  public get documentsFeed():string{
+        return this._documentsFeed;
   }
   
-  public get usersFeed():string{
-        return this._usersFeed;
+  public get storedProceduresFeed():string{
+        return this._storedProceduresFeed;
+  }
+  
+  public get triggersFeed():string{
+        return this._triggersFeed;
+  }
+  
+  public get userDefinedFunctionsFeed():string{
+        return this._userDefinedFunctionsFeed
+  }
+  
+  public get conflictsFeed():string{
+        return this._conflictsFeed;
+  }
+  
+  public get indexingPolicy():string{
+        return this._indexingPolicy;
   }
 }
