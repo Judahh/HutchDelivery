@@ -1,9 +1,10 @@
 /// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
- import account = require("../DocumentDB/Database");
+import list = require("../Collection/List");
+import database = require("../DocumentDB/Database");
 import documentDB = require('documentdb');
 var env = require('dotenv').load();
 export class DocumentDB {
-  private _listDatabase;
+  private _listDatabase:list.List<database.Database>;
   private _endPoint:string;
   private _authKey:string;
   private _client:documentDB.DocumentClient;
@@ -20,8 +21,13 @@ export class DocumentDB {
         console.log("Error:");//TODO: Create an ERROR
 				console.log(error);
         throw new Error("Error");
+        
       }else{
-        //TODO:_listDatabase populate with result
+        this._listDatabase = new list.List<database.Database>();
+        result.forEach(element => {
+          var database=new database.Database(element.id,element._rid,element._ts,element._self,element._etag,element._colls,element._users,this._client);
+					this._listDatabase.add(database);
+				});
         callback(this._listDatabase);
       }
     });
@@ -35,11 +41,11 @@ export class DocumentDB {
         return this._authKey;
   }
   
-  public get client():documentDB.DocumentClient {
+  public get client():documentDB.DocumentClient{
         return this.client;
   }
   
-  public get listDatabase() {
-        return this._listDatabase;
-  }
+  // public get listDatabase():list.List<database.Database>{
+  //       return this._listDatabase;
+  // }
 }
