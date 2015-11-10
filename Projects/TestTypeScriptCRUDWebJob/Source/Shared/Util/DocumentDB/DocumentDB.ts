@@ -25,9 +25,7 @@ export class DocumentDB {
       }else{
         this._listDatabase = new importList.List<importDatabase.Database>();
         result.forEach(element => {
-          var collections:string = element._colls;
-          var users:string = element._users; 
-          var database=new importDatabase.Database(element.id,element._rid,element._ts,element._self,element._etag,collections,users,this._client);
+          var database=new importDatabase.Database(element,this._client);
 					this._listDatabase.add(database);
 				});
         callback(this._listDatabase);
