@@ -13,23 +13,20 @@ export class Database {
   private _usersFeed:string;//users
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(
-  name:string,
-  identification:string,
-  timestamp:string,
-  uRI:string,
-  eTag:string,
-  collectionsFeed:string,
-  usersFeed:string,
+  public constructor(element,
   client:importDocumentDB.DocumentClient){
-    this._name=name;
-    this._identification=identification;
-    this._timestamp=timestamp;
-    this._uRI=uRI;
-    this._eTag=eTag;
-    this._collectionsFeed=collectionsFeed;
-    this._usersFeed=usersFeed;
+    this.organize(element);
     this._client=client;
+  }
+  
+  private organize(element){
+    this._name=element.id;
+    this._identification=element._rid;
+    this._timestamp=element._ts;
+    this._uRI=element._self;
+    this._eTag=element._etag;
+    this._collectionsFeed=element._colls;
+    this._usersFeed=element._users;
   }
   
   public getListCollection(callback){
@@ -41,7 +38,7 @@ export class Database {
       }else{
         this._listCollection = new importList.List<importCollection.Collection>();
         result.forEach(element => {
-          var collection=new collection.Collection(element.id,element._rid,element._ts,element._self,element._etag,element._docs,element._sprocs,element._triggers,element._udfs,element._conflicts,element.indexingPolicy,this._client);
+          var collection=new collection.Collection(element,this._client);
 					this._listCollection.add(collection);
 				});
         callback(this._listCollection);

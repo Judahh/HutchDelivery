@@ -5,6 +5,7 @@ export class Document {
   private _uRI:string;//self
   private _eTag:string;
   private _attachmentsFeed:string;//attachments
+  private _attachmentsFeed:string;//attachments
   private _client:importDocumentDB.DocumentClient;
   
   public constructor(

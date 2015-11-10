@@ -17,31 +17,23 @@ export class Collection {
   private _indexingPolicy;
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(
-  name:string,
-  identification:string,
-  timestamp:string,
-  uRI:string,
-  eTag:string,
-  documentsFeed:string,
-  storedProceduresFeed:string,
-  triggersFeed:string,
-  userDefinedFunctionsFeed:string,
-  conflictsFeed:string,
-  indexingPolicy,
-  client:importDocumentDB.DocumentClient){
-    this._name=name;
-    this._identification=identification;
-    this._timestamp=timestamp;
-    this._uRI=uRI;
-    this._eTag=eTag;
-    this._documentsFeed=documentsFeed;
-    this._storedProceduresFeed=storedProceduresFeed;
-    this._triggersFeed=triggersFeed;
-    this._userDefinedFunctionsFeed=userDefinedFunctionsFeed;
-    this._conflictsFeed=conflictsFeed;
-    this._indexingPolicy=indexingPolicy;
+  public constructor(elemnt, client:importDocumentDB.DocumentClient){
+    this.organize(element);
     this._client=client;
+  }
+  
+  private organize(element){
+    this._name=element.id;
+    this._identification=element._rid;
+    this._timestamp=element._ts;
+    this._uRI=element._self;
+    this._eTag=element._etag;
+    this._documentsFeed=element._docs;
+    this._storedProceduresFeed=element._sprocs;
+    this._triggersFeed=element._triggers;
+    this._userDefinedFunctionsFeed=element._udfs;
+    this._conflictsFeed=element._conflicts;
+    this._indexingPolicy=element.indexingPolicy;
   }
   
   public getListDocument(callback){
