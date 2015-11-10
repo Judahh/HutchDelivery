@@ -17,7 +17,7 @@ export class Collection {
   private _indexingPolicy;
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(elemnt, client:importDocumentDB.DocumentClient){
+  public constructor(element, client:importDocumentDB.DocumentClient){
     this.organize(element);
     this._client=client;
   }
@@ -46,7 +46,7 @@ export class Collection {
       }else{
         this._listDocument = new importList.List<importDocument.Document>();
         result.forEach(element => {
-          var document=new document.Document(element._ts,element._self,element._etag,element._attachments,this._client);
+          var document=new document.Document(element,this._client);
 					this._listCollection.add(document);
 				});
         callback(this._listCollection);

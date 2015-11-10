@@ -5,20 +5,18 @@ export class Document {
   private _uRI:string;//self
   private _eTag:string;
   private _attachmentsFeed:string;//attachments
-  private _attachmentsFeed:string;//attachments
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(
-  timestamp:string,
-  uRI:string,
-  eTag:string,
-  attachmentsFeed:string,
-  client:importDocumentDB.DocumentClient){
-    this._timestamp=timestamp;
-    this._uRI=uRI;
-    this._eTag=eTag;
-    this._attachmentsFeed=attachmentsFeed;
+  public constructor(element, client:importDocumentDB.DocumentClient){
+    this.organize(element);
     this._client=client;
+  }
+  
+  private organize(element){
+    this._timestamp=element._ts;
+    this._uRI=element._self;
+    this._eTag=element._etag;
+    this._attachmentsFeed=element._attachments;
   }
   
   public get timestamp():string{
