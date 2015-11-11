@@ -2,17 +2,15 @@
 import importDocumentDB = require('documentdb');
 import importDatabase  = require('./Database');
 import importList = require('../Collection/List');
-
-var env = require('dotenv').load();
 export class DocumentDB {
   private _listDatabase:importList.List<importDatabase.Database>;
   private _endPoint:string;
   private _authKey:string;
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(endPoint?:string, authKey?:string){
-    this._endPoint = endPoint|| process.env.AZURE_DOCUMENTDB_ENDPOINT;
-    this._authKey = authKey||process.env.AZURE_DOCUMENTDB_AUTH_KEY;
+  public constructor(endPoint:string, authKey:string){
+    this._endPoint = endPoint;
+    this._authKey = authKey;
     this._client = new importDocumentDB.DocumentClient(this._endPoint, {masterKey: this._authKey});
   }
   

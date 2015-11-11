@@ -5,13 +5,13 @@
 let env = require('dotenv').load();
 import DocumentDB = require('documentdb');
 import chai = require("chai");
-import documentDB = require("../../Shared/Util/DocumentDB/DocumentDB");
+import importDocumentDBPatient = require("../../Infrastructure/Model/DocumentDBPatient");
 import database = require("../../Shared/Util/DocumentDB/Database");
 chai.should();
 
 describe("TestDatabase", function() {
 	it("Deve retornar todos os DBs", () => {
-		var docDBClientWrite = new documentDB.DocumentDB();
+		var docDBClientWrite = new importDocumentDBPatient.DocumentDBPatient();
 		docDBClientWrite.getListDatabase(function(databases){
 			databases.items.forEach(element => {
 				console.log(element);
