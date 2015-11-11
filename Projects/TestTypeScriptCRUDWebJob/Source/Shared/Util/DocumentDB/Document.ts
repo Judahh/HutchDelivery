@@ -12,7 +12,7 @@ export class Document {
     this._client=client;
   }
   
-  private organize(element){
+  protected organize(element){
     this._timestamp=element._ts;
     this._uRI=element._self;
     this._eTag=element._etag;

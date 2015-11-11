@@ -1,11 +1,14 @@
 var Document = (function () {
-    function Document(timestamp, uRI, eTag, attachmentsFeed, client) {
-        this._timestamp = timestamp;
-        this._uRI = uRI;
-        this._eTag = eTag;
-        this._attachmentsFeed = attachmentsFeed;
+    function Document(element, client) {
+        this.organize(element);
         this._client = client;
     }
+    Document.prototype.organize = function (element) {
+        this._timestamp = element._ts;
+        this._uRI = element._self;
+        this._eTag = element._etag;
+        this._attachmentsFeed = element._attachments;
+    };
     Object.defineProperty(Document.prototype, "timestamp", {
         get: function () {
             return this._timestamp;

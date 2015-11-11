@@ -2,11 +2,10 @@
 var importDocumentDB = require('documentdb');
 var importDatabase = require('./Database');
 var importList = require('../Collection/List');
-var env = require('dotenv').load();
 var DocumentDB = (function () {
     function DocumentDB(endPoint, authKey) {
-        this._endPoint = endPoint || process.env.AZURE_DOCUMENTDB_ENDPOINT;
-        this._authKey = authKey || process.env.AZURE_DOCUMENTDB_AUTH_KEY;
+        this._endPoint = endPoint;
+        this._authKey = authKey;
         this._client = new importDocumentDB.DocumentClient(this._endPoint, { masterKey: this._authKey });
     }
     DocumentDB.prototype.getListDatabase = function (callback) {
@@ -20,9 +19,7 @@ var DocumentDB = (function () {
             else {
                 this._listDatabase = new importList.List();
                 result.forEach(function (element) {
-                    var collections = element._colls;
-                    var users = element._users;
-                    var database = new importDatabase.Database(element.id, element._rid, element._ts, element._self, element._etag, collections, users, _this._client);
+                    var database = new importDatabase.Database(element, _this._client);
                     _this._listDatabase.add(database);
                 });
                 callback(this._listDatabase);

@@ -1,19 +1,22 @@
 var importList = require("../Collection/List");
 var Collection = (function () {
-    function Collection(name, identification, timestamp, uRI, eTag, documentsFeed, storedProceduresFeed, triggersFeed, userDefinedFunctionsFeed, conflictsFeed, indexingPolicy, client) {
-        this._name = name;
-        this._identification = identification;
-        this._timestamp = timestamp;
-        this._uRI = uRI;
-        this._eTag = eTag;
-        this._documentsFeed = documentsFeed;
-        this._storedProceduresFeed = storedProceduresFeed;
-        this._triggersFeed = triggersFeed;
-        this._userDefinedFunctionsFeed = userDefinedFunctionsFeed;
-        this._conflictsFeed = conflictsFeed;
-        this._indexingPolicy = indexingPolicy;
+    function Collection(element, client) {
+        this.organize(element);
         this._client = client;
     }
+    Collection.prototype.organize = function (element) {
+        this._name = element.id;
+        this._identification = element._rid;
+        this._timestamp = element._ts;
+        this._uRI = element._self;
+        this._eTag = element._etag;
+        this._documentsFeed = element._docs;
+        this._storedProceduresFeed = element._sprocs;
+        this._triggersFeed = element._triggers;
+        this._userDefinedFunctionsFeed = element._udfs;
+        this._conflictsFeed = element._conflicts;
+        this._indexingPolicy = element.indexingPolicy;
+    };
     Collection.prototype.getListDocument = function (callback) {
         this._client.queryDocuments(this._uRI, "SELECT * FROM c").toArray(function (error, result) {
             var _this = this;
@@ -25,7 +28,7 @@ var Collection = (function () {
             else {
                 this._listDocument = new importList.List();
                 result.forEach(function (element) {
-                    var document = new document.Document(element._ts, element._self, element._etag, element._attachments, _this._client);
+                    var document = new document.Document(element, _this._client);
                     _this._listCollection.add(document);
                 });
                 callback(this._listCollection);

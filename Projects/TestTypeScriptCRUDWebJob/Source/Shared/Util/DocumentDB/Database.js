@@ -1,15 +1,18 @@
 var importList = require("../Collection/List");
 var Database = (function () {
-    function Database(name, identification, timestamp, uRI, eTag, collectionsFeed, usersFeed, client) {
-        this._name = name;
-        this._identification = identification;
-        this._timestamp = timestamp;
-        this._uRI = uRI;
-        this._eTag = eTag;
-        this._collectionsFeed = collectionsFeed;
-        this._usersFeed = usersFeed;
+    function Database(element, client) {
+        this.organize(element);
         this._client = client;
     }
+    Database.prototype.organize = function (element) {
+        this._name = element.id;
+        this._identification = element._rid;
+        this._timestamp = element._ts;
+        this._uRI = element._self;
+        this._eTag = element._etag;
+        this._collectionsFeed = element._colls;
+        this._usersFeed = element._users;
+    };
     Database.prototype.getListCollection = function (callback) {
         this._client.queryCollections(this._uRI, "SELECT * FROM c").toArray(function (error, result) {
             var _this = this;
@@ -21,7 +24,7 @@ var Database = (function () {
             else {
                 this._listCollection = new importList.List();
                 result.forEach(function (element) {
-                    var collection = new collection.Collection(element.id, element._rid, element._ts, element._self, element._etag, element._docs, element._sprocs, element._triggers, element._udfs, element._conflicts, element.indexingPolicy, _this._client);
+                    var collection = new collection.Collection(element, _this._client);
                     _this._listCollection.add(collection);
                 });
                 callback(this._listCollection);
