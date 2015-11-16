@@ -4,13 +4,13 @@ import importList = require("../Collection/List");
 import importCollection = require("./Collection");
 export class Database {
   private _listCollection:importList.List<importCollection.Collection>;
-  private _name:string;//id
-  private _identification:string;//rid
-  private _timestamp:string;//ts
-  private _uRI:string;//self
-  private _eTag:string;
-  private _collectionsFeed:string;//colls
-  private _usersFeed:string;//users
+  private _stringName:string;//id
+  private _stringIdentification:string;//rid
+  private _stringTimestamp:string;//ts
+  private _stringURI:string;//self
+  private _stringETag:string;
+  private _stringCollectionsFeed:string;//colls
+  private _stringUsersFeed:string;//users
   private _client:importDocumentDB.DocumentClient;
   
   public constructor(element,
@@ -20,17 +20,17 @@ export class Database {
   }
   
   private organize(element){
-    this._name=element.id;
-    this._identification=element._rid;
-    this._timestamp=element._ts;
-    this._uRI=element._self;
-    this._eTag=element._etag;
-    this._collectionsFeed=element._colls;
-    this._usersFeed=element._users;
+    this._stringName=element.id;
+    this._stringIdentification=element._rid;
+    this._stringTimestamp=element._ts;
+    this._stringURI=element._self;
+    this._stringETag=element._etag;
+    this._stringCollectionsFeed=element._colls;
+    this._stringUsersFeed=element._users;
   }
   
   public getListCollection(callback){
-    this._client.queryCollections(this._uRI,"SELECT * FROM c").toArray(function(error,result){
+    this._client.queryCollections(this._stringURI,"SELECT * FROM c").toArray(function(error,result){
       if(error){
         console.log("Error:");//TODO: Create an ERROR
 				console.log(error);
@@ -51,30 +51,30 @@ export class Database {
   // }
   
   public get name():string{
-        return this._name;
+        return this._stringName;
   }
   
   public get identification():string{
-        return this._identification;
+        return this._stringIdentification;
   }
   
   public get timestamp():string{
-        return this._timestamp;
+        return this._stringTimestamp;
   }
   
   public get uRI():string{
-        return this._uRI;
+        return this._stringURI;
   }
   
   public get eTag():string{
-        return this._eTag;
+        return this._stringETag;
   }
   
   public get collectionsFeed():string{
-        return this._collectionsFeed;
+        return this._stringCollectionsFeed;
   }
   
   public get usersFeed():string{
-        return this._usersFeed;
+        return this._stringUsersFeed;
   }
 }
