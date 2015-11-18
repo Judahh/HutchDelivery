@@ -5,16 +5,16 @@ var Database = (function () {
         this._client = client;
     }
     Database.prototype.organize = function (element) {
-        this._name = element.id;
-        this._identification = element._rid;
-        this._timestamp = element._ts;
-        this._uRI = element._self;
-        this._eTag = element._etag;
-        this._collectionsFeed = element._colls;
-        this._usersFeed = element._users;
+        this._stringName = element.id;
+        this._stringIdentification = element._rid;
+        this._stringTimestamp = element._ts;
+        this._stringURI = element._self;
+        this._stringETag = element._etag;
+        this._stringCollectionsFeed = element._colls;
+        this._stringUsersFeed = element._users;
     };
     Database.prototype.getListCollection = function (callback) {
-        this._client.queryCollections(this._uRI, "SELECT * FROM c").toArray(function (error, result) {
+        this._client.queryCollections(this._stringURI, "SELECT * FROM c").toArray(function (error, result) {
             var _this = this;
             if (error) {
                 console.log("Error:");
@@ -33,49 +33,49 @@ var Database = (function () {
     };
     Object.defineProperty(Database.prototype, "name", {
         get: function () {
-            return this._name;
+            return this._stringName;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "identification", {
         get: function () {
-            return this._identification;
+            return this._stringIdentification;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "timestamp", {
         get: function () {
-            return this._timestamp;
+            return this._stringTimestamp;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "uRI", {
         get: function () {
-            return this._uRI;
+            return this._stringURI;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "eTag", {
         get: function () {
-            return this._eTag;
+            return this._stringETag;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "collectionsFeed", {
         get: function () {
-            return this._collectionsFeed;
+            return this._stringCollectionsFeed;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Database.prototype, "usersFeed", {
         get: function () {
-            return this._usersFeed;
+            return this._stringUsersFeed;
         },
         enumerable: true,
         configurable: true
