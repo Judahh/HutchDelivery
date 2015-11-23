@@ -1,10 +1,10 @@
 /// <reference path="../../../../typings/documentdb/documentdb.d.ts" />
 import importDocumentDB = require('documentdb');
 export class Document {
-  private _timestamp:string;//ts
-  private _uRI:string;//self
-  private _eTag:string;
-  private _attachmentsFeed:string;//attachments
+  private _stringTimestamp:string;//ts
+  private _stringURI:string;//self
+  private _stringETag:string;
+  private _stringAttachmentsFeed:string;//attachments
   private _client:importDocumentDB.DocumentClient;
   
   public constructor(element, client:importDocumentDB.DocumentClient){
@@ -13,25 +13,25 @@ export class Document {
   }
   
   protected organize(element){
-    this._timestamp=element._ts;
-    this._uRI=element._self;
-    this._eTag=element._etag;
-    this._attachmentsFeed=element._attachments;
+    this._stringTimestamp=element._ts;
+    this._stringURI=element._self;
+    this._stringETag=element._etag;
+    this._stringAttachmentsFeed=element._attachments;
   }
   
-  public get timestamp():string{
-        return this._timestamp;
+  public get stringTimestamp():string{
+        return this._stringTimestamp;
   }
   
-  public get uRI():string{
-        return this._uRI;
+  public get stringURI():string{
+        return this._stringURI;
   }
   
-  public get eTag():string{
-        return this._eTag;
+  public get stringETag():string{
+        return this._stringETag;
   }
   
-  public get attachmentsFeed():string{
-        return this._attachmentsFeed;
+  public get stringAttachmentsFeed():string{
+        return this._stringAttachmentsFeed;
   }
 }

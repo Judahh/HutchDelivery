@@ -1,36 +1,36 @@
 var env = require('dotenv').load();
 export class Account {
-  private _name:string;
-  private _key:string;
-  private _uRL:string;
+  private _stringName:string;
+  private _stringKey:string;
+  private _stringURL:string;
   
-  public constructor(name?:string, key?:string, uRL?:string){
-    this._name=name||process.env.AZURE_STORAGE_ACCOUNT;
-    this._key=key||process.env.AZURE_STORAGE_ACCESS_KEY;
-    this._uRL=uRL||'https://'+this._name+'.queue.core.windows.net/';
+  public constructor(stringName?:string, stringKey?:string, stringURL?:string){
+    this._stringName=stringName||process.env.AZURE_STORAGE_ACCOUNT;
+    this._stringKey=stringKey||process.env.AZURE_STORAGE_ACCESS_KEY;
+    this._stringURL=stringURL||'https://'+this._stringName+'.queue.core.windows.net/';
   }
   
-  public get name():string {
-        return this._name;
+  public get stringName():string {
+        return this._stringName;
   }
   
-  public set accountName(name:string) {
-      this._name = name;
+  public set accountName(stringName:string) {
+      this._stringName = stringName;
   }
   
-  public get key():string {
-        return this._key;
+  public get stringKey():string {
+        return this._stringKey;
   }
   
-  public set key(key:string) {
-      this._key = key;
+  public set stringKey(stringKey:string) {
+      this._stringKey = stringKey;
   }
   
-  public get uRL():string {
-        return this._uRL;
+  public get stringURL():string {
+        return this._stringURL;
   }
   
-  public set uRL(uRL:string) {
-      this._uRL = uRL;
+  public set stringURL(stringURL:string) {
+      this._stringURL = stringURL;
   }
 }

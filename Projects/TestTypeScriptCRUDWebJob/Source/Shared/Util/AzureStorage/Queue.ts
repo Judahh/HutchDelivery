@@ -3,7 +3,7 @@ let azure = require('azure-storage');
 var env = require('dotenv').load();
 export class Queue {
   private _account:account.Account;
-  private _name:string;
+  private _stringName:string;
   private _queueService;
   
   public constructor(account:account.Account){
@@ -11,9 +11,9 @@ export class Queue {
     this._account=account;
   }
   
-  public createQueue(name?:string){
-    this._name=name||process.env.AZURE_STORAGE_QUEUE;
-    this._queueService.createQueueIfNotExists(this._name, true, function(error){
+  public createQueue(stringName?:string){
+    this._stringName=stringName||process.env.AZURE_STORAGE_QUEUE;
+    this._queueService.createQueueIfNotExists(this._stringName, true, function(error){
       if(error){
         throw new Error(error);
       }
@@ -21,7 +21,7 @@ export class Queue {
   }
   
   public createMessage(message){
-    this._queueService.createMessage(this._name, message, function(error){
+    this._queueService.createMessage(this._stringName, message, function(error){
       if(error){
         throw new Error(error);
       }
@@ -29,7 +29,7 @@ export class Queue {
   }
   
   public getMessages(callback){
-    this._queueService.getMessages(this._name, function(error, result){
+    this._queueService.getMessages(this._stringName, function(error, result){
       if(error){
         throw new Error(error);
       }else{
@@ -39,7 +39,7 @@ export class Queue {
   }
   
   public deleteMessage(message){
-    this._queueService.deleteMessage(this._name, message.messageid, message.popreceipt, function(error, response){
+    this._queueService.deleteMessage(this._stringName, message.messageid, message.popreceipt, function(error, response){
       if(error){
         throw new Error(error);
       }
@@ -50,8 +50,8 @@ export class Queue {
         return this._queueService;
   }
   
-  public get name():string {
-        return this._name;
+  public get stringName():string {
+        return this._stringName;
   }
   
   public get account() {

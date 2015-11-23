@@ -4,16 +4,16 @@ import importList = require("../Collection/List");
 import importDocument = require("./Document");
 export class Collection {
   private _listDocument:importList.List<importDocument.Document>;
-  private _name:string;//id
-  private _identification:string;//rid
-  private _timestamp:string;//ts
-  private _uRI:string;//self
-  private _eTag:string;
-  private _documentsFeed:string;//docs
-  private _storedProceduresFeed:string;//sprocs
-  private _triggersFeed:string;//triggers
-  private _userDefinedFunctionsFeed:string;//udfs
-  private _conflictsFeed:string;//conflicts
+  private _stringName:string;//id
+  private _stringIdentification:string;//rid
+  private _stringTimestamp:string;//ts
+  private _stringURI:string;//self
+  private _stringETag:string;
+  private _stringDocumentsFeed:string;//docs
+  private _stringStoredProceduresFeed:string;//sprocs
+  private _stringTriggersFeed:string;//triggers
+  private _stringUserDefinedFunctionsFeed:string;//udfs
+  private _stringConflictsFeed:string;//conflicts
   private _indexingPolicy;
   private _client:importDocumentDB.DocumentClient;
   
@@ -23,21 +23,21 @@ export class Collection {
   }
   
   private organize(element){
-    this._name=element.id;
-    this._identification=element._rid;
-    this._timestamp=element._ts;
-    this._uRI=element._self;
-    this._eTag=element._etag;
-    this._documentsFeed=element._docs;
-    this._storedProceduresFeed=element._sprocs;
-    this._triggersFeed=element._triggers;
-    this._userDefinedFunctionsFeed=element._udfs;
-    this._conflictsFeed=element._conflicts;
+    this._stringName=element.id;
+    this._stringIdentification=element._rid;
+    this._stringTimestamp=element._ts;
+    this._stringURI=element._self;
+    this._stringETag=element._etag;
+    this._stringDocumentsFeed=element._docs;
+    this._stringStoredProceduresFeed=element._sprocs;
+    this._stringTriggersFeed=element._triggers;
+    this._stringUserDefinedFunctionsFeed=element._udfs;
+    this._stringConflictsFeed=element._conflicts;
     this._indexingPolicy=element.indexingPolicy;
   }
   
   public getListDocument(callback){
-    this._client.queryDocuments(this._uRI,"SELECT * FROM c").toArray(function(error,result){
+    this._client.queryDocuments(this._stringURI,"SELECT * FROM c").toArray(function(error,result){
       if(error){
         console.log("Error:");//TODO: Create an ERROR
 				console.log(error);
@@ -58,44 +58,44 @@ export class Collection {
   //       return this._listCollection;
   // }
   
-  public get name():string{
-        return this._name;
+  public get stringName():string{
+        return this._stringName;
   }
   
-  public get identification():string{
-        return this._identification;
+  public get stringIdentification():string{
+        return this._stringIdentification;
   }
   
-  public get timestamp():string{
-        return this._timestamp;
+  public get stringTimestamp():string{
+        return this._stringTimestamp;
   }
   
-  public get uRI():string{
-        return this._uRI;
+  public get stringURI():string{
+        return this._stringURI;
   }
   
-  public get eTag():string{
-        return this._eTag;
+  public get stringETag():string{
+        return this._stringETag;
   }
   
-  public get documentsFeed():string{
-        return this._documentsFeed;
+  public get stringDocumentsFeed():string{
+        return this._stringDocumentsFeed;
   }
   
-  public get storedProceduresFeed():string{
-        return this._storedProceduresFeed;
+  public get stringStoredProceduresFeed():string{
+        return this._stringStoredProceduresFeed;
   }
   
-  public get triggersFeed():string{
-        return this._triggersFeed;
+  public get stringTriggersFeed():string{
+        return this._stringTriggersFeed;
   }
   
-  public get userDefinedFunctionsFeed():string{
-        return this._userDefinedFunctionsFeed
+  public get stringUserDefinedFunctionsFeed():string{
+        return this._stringUserDefinedFunctionsFeed
   }
   
-  public get conflictsFeed():string{
-        return this._conflictsFeed;
+  public get stringConflictsFeed():string{
+        return this._stringConflictsFeed;
   }
   
   public get indexingPolicy():string{

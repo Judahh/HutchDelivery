@@ -4,14 +4,14 @@ import importDatabase  = require('./Database');
 import importList = require('../Collection/List');
 export class DocumentDB {
   private _listDatabase:importList.List<importDatabase.Database>;
-  private _endPoint:string;
-  private _authKey:string;
+  private _stringEndPoint:string;
+  private _stringAuthKey:string;
   private _client:importDocumentDB.DocumentClient;
   
-  public constructor(endPoint:string, authKey:string){
-    this._endPoint = endPoint;
-    this._authKey = authKey;
-    this._client = new importDocumentDB.DocumentClient(this._endPoint, {masterKey: this._authKey});
+  public constructor(stringEndPoint:string, stringAuthKey:string){
+    this._stringEndPoint = stringEndPoint;
+    this._stringAuthKey = stringAuthKey;
+    this._client = new importDocumentDB.DocumentClient(this._stringEndPoint, {masterKey: this._stringAuthKey});
   }
   
   public getListDatabase(callback){
@@ -31,12 +31,12 @@ export class DocumentDB {
     });
   }
   
-  public get endPoint():string{
-        return this._endPoint;
+  public get stringEndPoint():string{
+        return this._stringEndPoint;
   }
   
-  public get authKey():string{
-        return this._authKey;
+  public get stringAuthKey():string{
+        return this._stringAuthKey;
   }
   
   public get client():importDocumentDB.DocumentClient{
