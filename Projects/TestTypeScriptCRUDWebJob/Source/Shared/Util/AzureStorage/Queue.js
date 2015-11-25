@@ -5,23 +5,23 @@ var Queue = (function () {
         this._queueService = azure.createQueueService();
         this._account = account;
     }
-    Queue.prototype.createQueue = function (name) {
-        this._name = name || process.env.AZURE_STORAGE_QUEUE;
-        this._queueService.createQueueIfNotExists(this._name, true, function (error) {
+    Queue.prototype.createQueue = function (stringName) {
+        this._stringName = stringName || process.env.AZURE_STORAGE_QUEUE;
+        this._queueService.createQueueIfNotExists(this._stringName, true, function (error) {
             if (error) {
                 throw new Error(error);
             }
         });
     };
     Queue.prototype.createMessage = function (message) {
-        this._queueService.createMessage(this._name, message, function (error) {
+        this._queueService.createMessage(this._stringName, message, function (error) {
             if (error) {
                 throw new Error(error);
             }
         });
     };
     Queue.prototype.getMessages = function (callback) {
-        this._queueService.getMessages(this._name, function (error, result) {
+        this._queueService.getMessages(this._stringName, function (error, result) {
             if (error) {
                 throw new Error(error);
             }
@@ -31,7 +31,7 @@ var Queue = (function () {
         });
     };
     Queue.prototype.deleteMessage = function (message) {
-        this._queueService.deleteMessage(this._name, message.messageid, message.popreceipt, function (error, response) {
+        this._queueService.deleteMessage(this._stringName, message.messageid, message.popreceipt, function (error, response) {
             if (error) {
                 throw new Error(error);
             }
@@ -44,9 +44,9 @@ var Queue = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Queue.prototype, "name", {
+    Object.defineProperty(Queue.prototype, "stringName", {
         get: function () {
-            return this._name;
+            return this._stringName;
         },
         enumerable: true,
         configurable: true

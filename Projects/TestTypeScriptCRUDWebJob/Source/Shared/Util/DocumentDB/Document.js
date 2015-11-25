@@ -4,35 +4,35 @@ var Document = (function () {
         this._client = client;
     }
     Document.prototype.organize = function (element) {
-        this._timestamp = element._ts;
-        this._uRI = element._self;
-        this._eTag = element._etag;
-        this._attachmentsFeed = element._attachments;
+        this._stringTimestamp = element._ts;
+        this._stringURI = element._self;
+        this._stringETag = element._etag;
+        this._stringAttachmentsFeed = element._attachments;
     };
-    Object.defineProperty(Document.prototype, "timestamp", {
+    Object.defineProperty(Document.prototype, "stringTimestamp", {
         get: function () {
-            return this._timestamp;
+            return this._stringTimestamp;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Document.prototype, "uRI", {
+    Object.defineProperty(Document.prototype, "stringURI", {
         get: function () {
-            return this._uRI;
+            return this._stringURI;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Document.prototype, "eTag", {
+    Object.defineProperty(Document.prototype, "stringETag", {
         get: function () {
-            return this._eTag;
+            return this._stringETag;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Document.prototype, "attachmentsFeed", {
+    Object.defineProperty(Document.prototype, "stringAttachmentsFeed", {
         get: function () {
-            return this._attachmentsFeed;
+            return this._stringAttachmentsFeed;
         },
         enumerable: true,
         configurable: true

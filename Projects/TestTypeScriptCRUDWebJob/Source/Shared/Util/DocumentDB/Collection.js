@@ -5,20 +5,20 @@ var Collection = (function () {
         this._client = client;
     }
     Collection.prototype.organize = function (element) {
-        this._name = element.id;
-        this._identification = element._rid;
-        this._timestamp = element._ts;
-        this._uRI = element._self;
-        this._eTag = element._etag;
-        this._documentsFeed = element._docs;
-        this._storedProceduresFeed = element._sprocs;
-        this._triggersFeed = element._triggers;
-        this._userDefinedFunctionsFeed = element._udfs;
-        this._conflictsFeed = element._conflicts;
+        this._stringName = element.id;
+        this._stringIdentification = element._rid;
+        this._stringTimestamp = element._ts;
+        this._stringURI = element._self;
+        this._stringETag = element._etag;
+        this._stringDocumentsFeed = element._docs;
+        this._stringStoredProceduresFeed = element._sprocs;
+        this._stringTriggersFeed = element._triggers;
+        this._stringUserDefinedFunctionsFeed = element._udfs;
+        this._stringConflictsFeed = element._conflicts;
         this._indexingPolicy = element.indexingPolicy;
     };
     Collection.prototype.getListDocument = function (callback) {
-        this._client.queryDocuments(this._uRI, "SELECT * FROM c").toArray(function (error, result) {
+        this._client.queryDocuments(this._stringURI, "SELECT * FROM c").toArray(function (error, result) {
             var _this = this;
             if (error) {
                 console.log("Error:");
@@ -35,72 +35,72 @@ var Collection = (function () {
             }
         });
     };
-    Object.defineProperty(Collection.prototype, "name", {
+    Object.defineProperty(Collection.prototype, "stringName", {
         get: function () {
-            return this._name;
+            return this._stringName;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "identification", {
+    Object.defineProperty(Collection.prototype, "stringIdentification", {
         get: function () {
-            return this._identification;
+            return this._stringIdentification;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "timestamp", {
+    Object.defineProperty(Collection.prototype, "stringTimestamp", {
         get: function () {
-            return this._timestamp;
+            return this._stringTimestamp;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "uRI", {
+    Object.defineProperty(Collection.prototype, "stringURI", {
         get: function () {
-            return this._uRI;
+            return this._stringURI;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "eTag", {
+    Object.defineProperty(Collection.prototype, "stringETag", {
         get: function () {
-            return this._eTag;
+            return this._stringETag;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "documentsFeed", {
+    Object.defineProperty(Collection.prototype, "stringDocumentsFeed", {
         get: function () {
-            return this._documentsFeed;
+            return this._stringDocumentsFeed;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "storedProceduresFeed", {
+    Object.defineProperty(Collection.prototype, "stringStoredProceduresFeed", {
         get: function () {
-            return this._storedProceduresFeed;
+            return this._stringStoredProceduresFeed;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "triggersFeed", {
+    Object.defineProperty(Collection.prototype, "stringTriggersFeed", {
         get: function () {
-            return this._triggersFeed;
+            return this._stringTriggersFeed;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "userDefinedFunctionsFeed", {
+    Object.defineProperty(Collection.prototype, "stringUserDefinedFunctionsFeed", {
         get: function () {
-            return this._userDefinedFunctionsFeed;
+            return this._stringUserDefinedFunctionsFeed;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Collection.prototype, "conflictsFeed", {
+    Object.defineProperty(Collection.prototype, "stringConflictsFeed", {
         get: function () {
-            return this._conflictsFeed;
+            return this._stringConflictsFeed;
         },
         enumerable: true,
         configurable: true

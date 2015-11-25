@@ -1,19 +1,19 @@
 var List = (function () {
     function List() {
-        this._items = [];
+        this._arrayItems = [];
     }
     List.prototype.size = function () {
-        return this._items.length;
+        return this._arrayItems.length;
     };
     List.prototype.add = function (value) {
-        this._items.push(value);
+        this._arrayItems.push(value);
     };
     List.prototype.get = function (index) {
-        return this._items[index];
+        return this._arrayItems[index];
     };
     Object.defineProperty(List.prototype, "items", {
         get: function () {
-            return this._items;
+            return this._arrayItems;
         },
         enumerable: true,
         configurable: true

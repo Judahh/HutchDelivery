@@ -3,10 +3,10 @@ var importDocumentDB = require('documentdb');
 var importDatabase = require('./Database');
 var importList = require('../Collection/List');
 var DocumentDB = (function () {
-    function DocumentDB(endPoint, authKey) {
-        this._endPoint = endPoint;
-        this._authKey = authKey;
-        this._client = new importDocumentDB.DocumentClient(this._endPoint, { masterKey: this._authKey });
+    function DocumentDB(stringEndPoint, stringAuthKey) {
+        this._stringEndPoint = stringEndPoint;
+        this._stringAuthKey = stringAuthKey;
+        this._client = new importDocumentDB.DocumentClient(this._stringEndPoint, { masterKey: this._stringAuthKey });
     }
     DocumentDB.prototype.getListDatabase = function (callback) {
         this._client.queryDatabases("SELECT * FROM d").toArray(function (error, result) {
@@ -26,16 +26,16 @@ var DocumentDB = (function () {
             }
         });
     };
-    Object.defineProperty(DocumentDB.prototype, "endPoint", {
+    Object.defineProperty(DocumentDB.prototype, "stringEndPoint", {
         get: function () {
-            return this._endPoint;
+            return this._stringEndPoint;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(DocumentDB.prototype, "authKey", {
+    Object.defineProperty(DocumentDB.prototype, "stringAuthKey", {
         get: function () {
-            return this._authKey;
+            return this._stringAuthKey;
         },
         enumerable: true,
         configurable: true

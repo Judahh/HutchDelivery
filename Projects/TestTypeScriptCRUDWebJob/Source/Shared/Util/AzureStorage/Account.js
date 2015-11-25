@@ -1,40 +1,40 @@
 var env = require('dotenv').load();
 var Account = (function () {
-    function Account(name, key, uRL) {
-        this._name = name || process.env.AZURE_STORAGE_ACCOUNT;
-        this._key = key || process.env.AZURE_STORAGE_ACCESS_KEY;
-        this._uRL = uRL || 'https://' + this._name + '.queue.core.windows.net/';
+    function Account(stringName, stringKey, stringURL) {
+        this._stringName = stringName || process.env.AZURE_STORAGE_ACCOUNT;
+        this._stringKey = stringKey || process.env.AZURE_STORAGE_ACCESS_KEY;
+        this._stringURL = stringURL || 'https://' + this._stringName + '.queue.core.windows.net/';
     }
-    Object.defineProperty(Account.prototype, "name", {
+    Object.defineProperty(Account.prototype, "stringName", {
         get: function () {
-            return this._name;
+            return this._stringName;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Account.prototype, "accountName", {
-        set: function (name) {
-            this._name = name;
+        set: function (stringName) {
+            this._stringName = stringName;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Account.prototype, "key", {
+    Object.defineProperty(Account.prototype, "stringKey", {
         get: function () {
-            return this._key;
+            return this._stringKey;
         },
-        set: function (key) {
-            this._key = key;
+        set: function (stringKey) {
+            this._stringKey = stringKey;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Account.prototype, "uRL", {
+    Object.defineProperty(Account.prototype, "stringURL", {
         get: function () {
-            return this._uRL;
+            return this._stringURL;
         },
-        set: function (uRL) {
-            this._uRL = uRL;
+        set: function (stringURL) {
+            this._stringURL = stringURL;
         },
         enumerable: true,
         configurable: true

@@ -1,6 +1,7 @@
 var Account = require("Source/AzureStorage/Account");
 var Queue = require("Source/AzureStorage/Queue");
 var chai = require("chai");
+require('dotenv').load();
 chai.should();
 var account = new Account.Account();
 var queue = new Queue.Queue(account);
